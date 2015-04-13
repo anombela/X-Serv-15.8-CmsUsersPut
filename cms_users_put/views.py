@@ -7,14 +7,17 @@ from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
+
 @csrf_exempt
 def cms_users_put(request, recurso):
 
     estado = ""
     if request.user.is_authenticated():
-        estado += "</br>Eres " + request.user.username + "<a href='/logout'>Logout</a>"
+        estado += "</br>Eres " + request.user.username
+        + "<a href='/logout'>Logout</a>"
     else:
-        estado += "No estas autenticado. <a href='http://127.0.0.1:8000/admin/login/'>Haz login</a>"
+        estado += "No estas autenticado. " +
+        "<a href='http://127.0.0.1:8000/admin/login/'>Haz login</a>"
 
     if request.method == 'GET':
         try:
@@ -33,4 +36,4 @@ def cms_users_put(request, recurso):
     else:
         return HttpResponse("No esta disponible el metodo" + request.method)
 
-    return HttpResponseNotFound( estado)
+    return HttpResponseNotFound(estado)
